@@ -1,7 +1,7 @@
 package com.emcode.taskmanager.mapper;
 
 import com.emcode.taskmanager.dto.ProjectResponse;
-import com.emcode.taskmanager.dto.UserRequest;
+import com.emcode.taskmanager.dto.UserCreateRequest;
 import com.emcode.taskmanager.dto.UserResponse;
 import com.emcode.taskmanager.model.User;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,7 @@ public class UserMapper {
         );
     }
 
-    public User toEntity(UserRequest request) {
+    public User toEntity(UserCreateRequest request) {
         User user = new User();
         user.setUsername(request.username());
         user.setEmail(request.email());

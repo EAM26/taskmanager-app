@@ -1,6 +1,6 @@
 package com.emcode.taskmanager.mapper;
 
-import com.emcode.taskmanager.dto.TaskRequest;
+import com.emcode.taskmanager.dto.TaskCreateRequest;
 import com.emcode.taskmanager.dto.TaskResponse;
 import com.emcode.taskmanager.model.Project;
 import com.emcode.taskmanager.model.Task;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TaskMapper {
-    public Task toEntity(TaskRequest request, Task task, Project project) {
+    public Task toEntity(TaskCreateRequest request, Task task, Project project) {
         task.setTitle(request.title());
         task.setDescription(request.description());
         task.setProject(project);

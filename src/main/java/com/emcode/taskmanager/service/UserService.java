@@ -1,6 +1,6 @@
 package com.emcode.taskmanager.service;
 
-import com.emcode.taskmanager.dto.UserRequest;
+import com.emcode.taskmanager.dto.UserCreateRequest;
 import com.emcode.taskmanager.dto.UserResponse;
 import com.emcode.taskmanager.error.RecordNotFoundException;
 import com.emcode.taskmanager.mapper.UserMapper;
@@ -19,7 +19,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper usermapper;
 
-    public UserResponse createUser(UserRequest request) {
+    public UserResponse createUser(UserCreateRequest request) {
         User savedUser = userRepository.save(usermapper.toEntity(request));
         return usermapper.toResponse(savedUser);
     }

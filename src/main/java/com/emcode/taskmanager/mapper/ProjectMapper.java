@@ -1,7 +1,7 @@
 package com.emcode.taskmanager.mapper;
 
 import com.emcode.taskmanager.dto.ProjectDetailedResponse;
-import com.emcode.taskmanager.dto.ProjectRequest;
+import com.emcode.taskmanager.dto.ProjectCreateRequest;
 import com.emcode.taskmanager.dto.ProjectResponse;
 import com.emcode.taskmanager.dto.TaskResponse;
 import com.emcode.taskmanager.model.Project;
@@ -18,7 +18,7 @@ public class ProjectMapper {
     private final TaskRepository taskRepository;
     private final TaskMapper taskmapper;
 
-    public Project toEntity(ProjectRequest request, Project project, User user) {
+    public Project toEntity(ProjectCreateRequest request, Project project, User user) {
         project.setTitle(request.title());
         project.setDescription(request.description());
         project.setUser(user);

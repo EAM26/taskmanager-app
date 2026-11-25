@@ -1,7 +1,7 @@
 package com.emcode.taskmanager.service;
 
 import com.emcode.taskmanager.dto.ProjectDetailedResponse;
-import com.emcode.taskmanager.dto.ProjectRequest;
+import com.emcode.taskmanager.dto.ProjectCreateRequest;
 import com.emcode.taskmanager.dto.ProjectResponse;
 import com.emcode.taskmanager.error.RecordNotFoundException;
 import com.emcode.taskmanager.mapper.ProjectMapper;
@@ -25,7 +25,7 @@ public class ProjectService {
     private final UserRepository userRepository;
     private final TaskMapper taskMapper;
 
-    public ProjectResponse createProject(ProjectRequest request) {
+    public ProjectResponse createProject(ProjectCreateRequest request) {
         User user = userRepository.findById(request.userId()).orElseThrow(()->
                 new RecordNotFoundException("User not found: " + request.userId()));
         Project savedProject = projectRepository.save(projectMapper.toEntity(request, new Project(), user));
