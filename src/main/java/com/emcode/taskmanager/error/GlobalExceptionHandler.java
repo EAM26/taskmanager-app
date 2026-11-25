@@ -29,4 +29,12 @@ public class GlobalExceptionHandler {
                 detail
         );
     }
+
+    @ExceptionHandler(UsernameNotUniqueException.class)
+    public ProblemDetail handleUsernameNotUniqueException(UsernameNotUniqueException ex) {
+        return ProblemDetail.forStatusAndDetail(
+                HttpStatus.CONFLICT,
+                ex.getMessage()
+        );
+    }
 }

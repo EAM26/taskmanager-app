@@ -3,6 +3,7 @@ package com.emcode.taskmanager.service;
 import com.emcode.taskmanager.dto.UserCreateRequest;
 import com.emcode.taskmanager.dto.UserResponse;
 import com.emcode.taskmanager.error.RecordNotFoundException;
+import com.emcode.taskmanager.error.UsernameNotUniqueException;
 import com.emcode.taskmanager.mapper.UserMapper;
 import com.emcode.taskmanager.model.User;
 import com.emcode.taskmanager.repository.UserRepository;
@@ -20,6 +21,9 @@ public class UserService {
     private final UserMapper usermapper;
 
     public UserResponse createUser(UserCreateRequest request) {
+        if(userRepository.existsByUsername(request.username())) {
+            throw new UsernameNotUniqueException("Username already exists: " + request.username());
+        }
         User savedUser = userRepository.save(usermapper.toEntity(request));
         return usermapper.toResponse(savedUser);
     }
