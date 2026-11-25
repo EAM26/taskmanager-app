@@ -1,9 +1,9 @@
 package com.emcode.taskmanager.controller;
 
-import com.emcode.taskmanager.dto.UserRequest;
+import com.emcode.taskmanager.dto.UserCreateRequest;
 import com.emcode.taskmanager.dto.UserResponse;
-import com.emcode.taskmanager.repository.UserRepository;
 import com.emcode.taskmanager.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,6 @@ import java.util.List;
 @RequestMapping("/api/users")
 public class UserController {
 
-    private final UserRepository userRepo;
     private final UserService userService;
 
     @GetMapping("/{id}")
@@ -26,7 +25,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest request) {
+    public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserCreateRequest request) {
         UserResponse response = userService.createUser(request);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/api/users/{id}")
