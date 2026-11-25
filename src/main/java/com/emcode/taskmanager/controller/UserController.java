@@ -2,7 +2,6 @@ package com.emcode.taskmanager.controller;
 
 import com.emcode.taskmanager.dto.UserCreateRequest;
 import com.emcode.taskmanager.dto.UserResponse;
-import com.emcode.taskmanager.repository.UserRepository;
 import com.emcode.taskmanager.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +17,6 @@ import java.util.List;
 @RequestMapping("/api/users")
 public class UserController {
 
-    private final UserRepository userRepo;
     private final UserService userService;
 
     @GetMapping("/{id}")

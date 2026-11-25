@@ -1,12 +1,10 @@
 package com.emcode.taskmanager.mapper;
 
-import com.emcode.taskmanager.dto.ProjectDetailedResponse;
-import com.emcode.taskmanager.dto.ProjectCreateRequest;
-import com.emcode.taskmanager.dto.ProjectResponse;
-import com.emcode.taskmanager.dto.TaskResponse;
+import com.emcode.taskmanager.dto.*;
 import com.emcode.taskmanager.model.Project;
 import com.emcode.taskmanager.model.User;
 import com.emcode.taskmanager.repository.TaskRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -49,5 +47,12 @@ public class ProjectMapper {
                 project.getUser().getId(),
                 tasks
         );
+    }
+
+    public Project update(Project project, @Valid ProjectPutRequest request) {
+        project.setTitle(request.title());
+        project.setDescription(request.description());
+        project.setStatus(request.status());
+        return project;
     }
 }

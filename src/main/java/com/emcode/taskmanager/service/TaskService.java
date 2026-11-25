@@ -1,6 +1,7 @@
 package com.emcode.taskmanager.service;
 
 import com.emcode.taskmanager.dto.TaskCreateRequest;
+import com.emcode.taskmanager.dto.TaskPutRequest;
 import com.emcode.taskmanager.dto.TaskResponse;
 import com.emcode.taskmanager.error.RecordNotFoundException;
 import com.emcode.taskmanager.mapper.TaskMapper;
@@ -29,8 +30,7 @@ public class TaskService {
     }
 
     public TaskResponse findById(Long id) {
-        Task task = taskRepository.findById(id).orElseThrow(() ->
-                new RecordNotFoundException("Task not found" + id));
+        Task task = getTask(id);
         return taskMapper.toResponse(task);
     }
 
@@ -42,4 +42,14 @@ public class TaskService {
     }
 
 
+    public TaskResponse replaceTask(Long id, TaskPutRequest request) {
+        Task taskToUpdate = getTask(id);
+        Task updatedTask = taskMapper.update(taskToUpdate, request);
+        return taskMapper.toResponse(taskRepository.save(updatedTask));
+    }
+
+    public Task getTask(Long id) {
+        return taskRepository.findById(id).orElseThrow(() ->
+                new RecordNotFoundException("Task not found" + id));
+    }
 }
